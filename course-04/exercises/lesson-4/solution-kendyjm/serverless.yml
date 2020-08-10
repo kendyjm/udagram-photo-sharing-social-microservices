@@ -46,7 +46,7 @@ provider:
     - Effect: Allow
       Action:
         - s3:PutObject
-      Resource: "arn:aws:s3:::${self:provider.environment.THUMBNAILS_S3_BUCKET}/*"
+      Resource: arn:aws:s3:::${self:provider.environment.THUMBNAILS_S3_BUCKET}/*
     - Effect: Allow
       Action:
         - dynamodb:Scan
