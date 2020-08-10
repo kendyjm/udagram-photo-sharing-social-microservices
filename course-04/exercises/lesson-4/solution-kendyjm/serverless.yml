@@ -159,15 +159,15 @@ functions:
       - websocket:
           route: $disconnect
 
-  # Uncomment if you want to enable Elasticsearch sync
-  # SyncWithElasticsearch:
-  #   environment:
-  #     ES_ENDPOINT: !GetAtt ImagesSearch.DomainEndpoint
-  #   handler: src/lambda/dynamoDb/elasticSearchSync.handler
-  #   events:
-  #     - stream:
-  #         type: dynamodb
-  #         arn: !GetAtt ImagesDynamoDBTable.StreamArn
+  #Uncomment if you want to enable Elasticsearch sync
+  SyncWithElasticsearch:
+    environment:
+      ES_ENDPOINT: !GetAtt ImagesSearch.DomainEndpoint
+    handler: src/lambda/dynamoDb/elasticSearchSync.handler
+    events:
+      - stream:
+          type: dynamodb
+          arn: !GetAtt ImagesDynamoDBTable.StreamArn
 
 resources:
   Resources:
@@ -301,28 +301,28 @@ resources:
         TopicName: ${self:custom.topicName}
 
     # Uncomment if you want to create Elasticsearch
-    # ImagesSearch:
-    #   Type: AWS::Elasticsearch::Domain
-    #   Properties:
-    #     ElasticsearchVersion: '6.3'
-    #     DomainName: images-search-${self:provider.stage}
-    #     ElasticsearchClusterConfig:
-    #       DedicatedMasterEnabled: false
-    #       InstanceCount: '1'
-    #       ZoneAwarenessEnabled: false
-    #       InstanceType: t2.small.elasticsearch
-    #     EBSOptions:
-    #       EBSEnabled: true
-    #       Iops: 0
-    #       VolumeSize: 10
-    #       VolumeType: 'gp2'
+    ImagesSearch:
+      Type: AWS::Elasticsearch::Domain
+      Properties:
+        ElasticsearchVersion: '6.3'
+        DomainName: images-search-${self:provider.stage}
+        ElasticsearchClusterConfig:
+          DedicatedMasterEnabled: false
+          InstanceCount: '1'
+          ZoneAwarenessEnabled: false
+          InstanceType: t2.small.elasticsearch
+        EBSOptions:
+          EBSEnabled: true
+          Iops: 0
+          VolumeSize: 10
+          VolumeType: 'gp2'
 
-    #     AccessPolicies:
-    #       Version: '2012-10-17'
-    #       Statement:
-    #         -
-    #           Effect: Allow
-    #           Principal:
-    #             AWS: '*'
-    #           Action: 'es:*'
-    #           Resource: '*'
+        AccessPolicies:
+          Version: '2012-10-17'
+          Statement:
+            -
+              Effect: Allow
+              Principal:
+                AWS: '*'
+              Action: 'es:*'
+              Resource: '*'
