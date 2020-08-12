@@ -21,4 +21,4 @@ _Keywords : AWS, Elastic Kubernetes Service (Amazon EKS), reverse-proxy with NGI
 
 PROJECT 4 : Udagram V3 - serverless
 
-_keywords: aws-lambda, dynamodb stream, aws-api-gateway, serverless framework, CloudFormation (service for creation and management of AWS resources), SNS (Simple Notification Service), Websocket, full-text search with Elasticsearch, Event-driven _
+_keywords: aws-lambda, dynamodb stream, aws-api-gateway, serverless framework, CloudFormation (service for creation and management of AWS resources), SNS (Simple Notification Service), Websocket, full-text search with Elasticsearch, Event-driven, Middy middleware, OAuth and Open Id protocols, Auth0 service, RS256 (asymmetric) algorithm_

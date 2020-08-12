@@ -1,0 +1,146 @@
+23a24,25
+>     AUTH_0_SECRET_ID: Auth0Secret-${self:provider.stage}
+>     AUTH_0_SECRET_FIELD: auth0Secret
+49c51
+<       Resource: arn:aws:s3:::${self:provider.environment.THUMBNAILS_S3_BUCKET}/*
+---
+>       Resource: "arn:aws:s3:::${self:provider.environment.THUMBNAILS_S3_BUCKET}/*"
+55a58,65
+>     - Effect: Allow
+>       Action:
+>         - secretsmanager:GetSecretValue
+>       Resource: !Ref Auth0Secret
+>     - Effect: Allow
+>       Action:
+>         - kms:Decrypt
+>       Resource: !GetAtt KMSKey.Arn
+74a85,90
+>   RS256Auth:
+>     handler: src/lambda/auth/rs256Auth0Authorizer.handler
+> 
+>   Auth:
+>     handler: src/lambda/auth/auth0Authorizer.handler
+> 
+89a106
+>           authorizer: RS256Auth
+109a127
+>           authorizer: RS256Auth
+122c140
+<       REGION: ${self:provider.region}      
+---
+>       REGION: ${self:provider.region}
+162,170c180,187
+<   #Uncomment if you want to enable Elasticsearch sync
+<   SyncWithElasticsearch:
+<     environment:
+<       ES_ENDPOINT: !GetAtt ImagesSearch.DomainEndpoint
+<     handler: src/lambda/dynamoDb/elasticSearchSync.handler
+<     events:
+<       - stream:
+<           type: dynamodb
+<           arn: !GetAtt ImagesDynamoDBTable.StreamArn
+---
+>   # SyncWithElasticsearch:
+>   #   environment:
+>   #     ES_ENDPOINT: !GetAtt ImagesSearch.DomainEndpoint
+>   #   handler: src/lambda/dynamoDb/elasticSearchSync.handler
+>   #   events:
+>   #     - stream:
+>   #         type: dynamodb
+>   #         arn: !GetAtt ImagesDynamoDBTable.StreamArn
+173a191,201
+>     GatewayResponseDefault4XX:
+>       Type: AWS::ApiGateway::GatewayResponse
+>       Properties:
+>         ResponseParameters:
+>           gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+>           gatewayresponse.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+>           gatewayresponse.header.Access-Control-Allow-Methods: "'GET,OPTIONS,POST'"
+>         ResponseType: DEFAULT_4XX
+>         RestApiId:
+>           Ref: ApiGatewayRestApi
+> 
+303,318c331,355
+<     # Uncomment if you want to create Elasticsearch
+<     ImagesSearch:
+<       Type: AWS::Elasticsearch::Domain
+<       Properties:
+<         ElasticsearchVersion: '6.3'
+<         DomainName: images-search-${self:provider.stage}
+<         ElasticsearchClusterConfig:
+<           DedicatedMasterEnabled: false
+<           InstanceCount: '1'
+<           ZoneAwarenessEnabled: false
+<           InstanceType: t2.small.elasticsearch
+<         EBSOptions:
+<           EBSEnabled: true
+<           Iops: 0
+<           VolumeSize: 10
+<           VolumeType: 'gp2'
+---
+>     # ImagesSearch:
+>     #   Type: AWS::Elasticsearch::Domain
+>     #   Properties:
+>     #     ElasticsearchVersion: '6.3'
+>     #     DomainName: images-search-${self:provider.stage}
+>     #     ElasticsearchClusterConfig:
+>     #       DedicatedMasterEnabled: false
+>     #       InstanceCount: '1'
+>     #       ZoneAwarenessEnabled: false
+>     #       InstanceType: t2.small.elasticsearch
+>     #     EBSOptions:
+>     #       EBSEnabled: true
+>     #       Iops: 0
+>     #       VolumeSize: 10
+>     #       VolumeType: 'gp2'
+> 
+>     #     AccessPolicies:
+>     #       Version: '2012-10-17'
+>     #       Statement:
+>     #         -
+>     #           Effect: Allow
+>     #           Principal:
+>     #             AWS: '*'
+>     #           Action: 'es:*'
+>     #           Resource: '*'
+320c357,361
+<         AccessPolicies:
+---
+>     KMSKey:
+>       Type: AWS::KMS::Key
+>       Properties:
+>         Description: KMS key to encrypt Auth0 secret
+>         KeyPolicy:
+321a363
+>           Id: key-default-1
+323c365
+<             -
+---
+>             - Sid: Allow administration of the key
+326,327c368,375
+<                 AWS: '*'
+<               Action: 'es:*'
+---
+>                 AWS:
+>                   Fn::Join:
+>                   - ':'
+>                   - - 'arn:aws:iam:'
+>                     - Ref: AWS::AccountId
+>                     - 'root'
+>               Action:
+>                 - 'kms:*'
+328a377,390
+> 
+>     KMSKeyAlias:
+>       Type: AWS::KMS::Alias
+>       Properties:
+>         AliasName: alias/auth0Key-${self:provider.stage}
+>         TargetKeyId: !Ref KMSKey
+> 
+>     Auth0Secret:
+>       Type: AWS::SecretsManager::Secret
+>       Properties:
+>         Name: ${self:provider.environment.AUTH_0_SECRET_ID}
+>         Description: Auth0 secret
+>         KmsKeyId: !Ref KMSKey
+> 
