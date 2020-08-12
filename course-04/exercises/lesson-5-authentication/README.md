@@ -49,8 +49,18 @@ npm install
 npm run start
 ```
 
-Login with Google, you should be now authentified.
+Login with any social identity providers available (Google, Facebook...), you should be now authentified.
+
+![auth0-login-social-identity-providers](./assets/auth0-login-social-identity-providers.png)
 
 Create a group.
 Once a group is created, you should be able to see it in the Groups-dev DynamoDB table, but now it should contain an attribute containing a user's id.
 
+```json
+{
+  "description": "nature only",
+  "id": "8b3cc161-5e3a-47ff-897f-5c097c4e6ac9",
+  "name": "nature",
+  "userId": "google-oauth2|101446148947892132409"
+}
+```
