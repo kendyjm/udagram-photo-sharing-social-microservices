@@ -7,10 +7,11 @@ const docClient = new AWS.DynamoDB.DocumentClient()
 const connectionsTable = process.env.CONNECTIONS_TABLE
 const stage = process.env.STAGE
 const apiId = process.env.API_ID
+const region = process.env.REGION
 
 const connectionParams = {
   apiVersion: "2018-11-29",
-  endpoint: `${apiId}.execute-api.us-east-1.amazonaws.com/${stage}`
+  endpoint: `${apiId}.execute-api.${region}.amazonaws.com/${stage}`
 }
 
 const apiGateway = new AWS.ApiGatewayManagementApi(connectionParams)
