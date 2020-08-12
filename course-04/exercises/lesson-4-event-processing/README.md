@@ -5,7 +5,10 @@ In this exercise, you will have to :
 - implement a Lambda function that processes newly uploaded images, creates a smaller version of the same image, and uploads an image to a different S3 bucket.
 - Enable full-text search with Elasticsearch.
 
-Full instructions [here](lesson-4-exercise-instructions.pdf)
+Full instructions :
+
+- [lesson-4-exercise-instructions.pdf](lesson-4-exercise-instructions.pdf)
+- [https://www.youtube.com/watch?v=bTa3p4IKTG0](https://www.youtube.com/watch?v=bTa3p4IKTG0)
 
 ## Architecture
 
