@@ -171,7 +171,7 @@ Browse the frontend application : <http://localhost:8100/>
 ### CI/CD with Travis
 
 - Sign up for [Travis](https://travis-ci.com) and connect your Github application repository to TravisCL.
-- Have a look to the [config file](../.travis.yml) that will be read by Travis, at the root of the repository. It needs some environment variables.
+- Have a look to the [config file](.travis.yml) that will be read by Travis, at the root of the repository. It needs some environment variables.
 - Add your environment variables to the project repository in [Travis](https://travis-ci.com) by selecting the setting option.
 - Commit and Push your changes trigger a Travis build.
 - Check the build status page to see if your build passes or fails according to the return status of the build command by visiting [TravisCL](https://travis-ci.com) and selecting your repository.
