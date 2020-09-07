@@ -5,7 +5,7 @@ master: [![Build Status](https://travis-ci.com/kendyjm/udacity-cloud-developer-n
 
 ## Context
 
-[Udacity NANODEGREE Cloud Developer - My Root repository](../udacity-cloud-developer-nd9990)
+[Udacity NANODEGREE Cloud Developer - My Root repository](https://github.com/kendyjm/udacity-cloud-developer-nd9990)
 
 ## Udagram Image Filtering Microservice
 
