@@ -1,7 +1,7 @@
 # CLOUD DEVELOPER (nd9990) - PROJECT 3 - Udagram V2 - microservices at scale! Your Own Instagram on AWS!
 
 
-master: [![Build Status](https://travis-ci.com/kendyjm/udacity-cloud-developer-nd9990-project3-microservices-udagram.svg?branch=master)](https://travis-ci.com/kendyjm/udacity-cloud-developer-nd9990-project3-microservices-udagram) - development: [![Build Status](https://travis-ci.com/kendyjm/udacity-cloud-developer-nd9990-project3-microservices-udagram.svg?branch=development)](https://travis-ci.com/kendyjm/udacity-cloud-developer-nd9990-project3-microservices-udagram)
+master: [![Build Status](https://travis-ci.com/kendyjm/udagram-photo-sharing-social-microservices.svg?branch=master)](https://travis-ci.com/kendyjm/udagram-photo-sharing-social-microservices) - development: [![Build Status](https://travis-ci.com/kendyjm/udagram-photo-sharing-social-microservices.svg?branch=development)](https://travis-ci.com/kendyjm/udagram-photo-sharing-social-microservices)
 
 ## Context
 
